@@ -1,3 +1,23 @@
 <resources>
-    <string name="app_name">ArtGalleryApp</string>
+    <string name="app_name">CatGalleryApp</string>
+    <string name="title_two">Title Two</string>
+    <string name="title_one">Title One</string>
+    <string name="artist_one">"Artist One - "</string>
+    <string name="year_one">Year One</string>
+    <string name="artist_two">"Artist Two - "</string>
+    <string name="year_two">Year Two</string>
+    <string name="title_three">Title Three</string>
+    <string name="artist_three">"Artist Three - "</string>
+    <string name="year_three">Year Three</string>
+    <string name="title_four">Title Four</string>
+    <string name="artist_four">"Artist Four - "</string>
+    <string name="year_four">Year Four</string>
+    <string name="title_five">Title Five</string>
+    <string name="artist_five">"Artist Five - "</string>
+    <string name="year_five">Year Five</string>
+    <string name="a_wonderful_cat_one">A wonderful cat - One</string>
+    <string name="a_wonderful_cat_two">A wonderful cat - Two</string>
+    <string name="a_wonderful_cat_three">A wonderful cat - Three</string>
+    <string name="a_wonderful_cat_four">A wonderful cat - Four</string>
+    <string name="a_wonderful_cat_five">A wonderful cat - Five</string>
 </resources>

@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -50,74 +51,99 @@ fun ArtGalleryApp(
     modifier: Modifier = Modifier
 ) {
     var currentScreen by remember { mutableStateOf(1) }
-    var picture by remember { mutableStateOf(R.drawable.cat_one) }
-    var descriptionPicture by remember { mutableStateOf("A beautiful cat - One") }
-    var title by remember { mutableStateOf("Title One") }
-    var artist by remember { mutableStateOf("Artist One -") }
-    var year by remember { mutableStateOf("Random Year One") }
-    var onClickedNext by remember { mutableStateOf(false) }
-    var onClickedBack by remember { mutableStateOf(false) }
 
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.fillMaxSize()
+        modifier = modifier.fillMaxWidth()
     ) {
-        MainImage(
-            picture = picture,
-            description = descriptionPicture,
-        )
-        Column (
-            verticalArrangement = Arrangement.Center,
-            modifier = modifier
-                .fillMaxWidth()
-                .wrapContentWidth()
-        ){
-            Text(
-                text = title,
-                fontSize = 44.sp,
-                modifier = modifier
-                    .padding(30.dp)
-                    .align(Alignment.CenterHorizontally)
-            )
-
-            Row (
-                horizontalArrangement = Arrangement.Center,
-                modifier = modifier.padding(30.dp)
-
-            ) {
-                Text(
-                    text = "$artist \n",
-                    fontSize = 16.sp,
-                    modifier = modifier
+        when (currentScreen) {
+            1 -> {
+                MainImage (
+                    picture = R.drawable.cat_one,
+                    description = stringResource(R.string.a_wonderful_cat_one),
                 )
 
-                Text(
-                    text = year,
-                    fontSize = 16.sp,
-                    modifier = modifier
+                MainTextBlock (
+                    title = stringResource(R.string.title_one),
+                    artist = stringResource(R.string.artist_one) ,
+                    year = stringResource(R.string.year_one)
+                )
+
+                MainButtonsRow(
+                    onButtonClickedBack = { currentScreen = 5},
+                    onButtonClickedNext = { currentScreen = 2 },
+                )
+            }
+            2 -> {
+                MainImage (
+                    picture = R.drawable.cat_two,
+                    description = stringResource(R.string.a_wonderful_cat_two),
+                )
+
+                MainTextBlock (
+                    title = stringResource(R.string.title_two),
+                    artist = stringResource(R.string.artist_two) ,
+                    year = stringResource(R.string.year_two)
+                )
+
+                MainButtonsRow(
+                    onButtonClickedBack = { currentScreen = 1},
+                    onButtonClickedNext = { currentScreen = 3 },
                 )
 
             }
+            3 -> {
+                MainImage (
+                    picture = R.drawable.cat_three,
+                    description = stringResource(R.string.a_wonderful_cat_three),
+                )
 
-        }
+                MainTextBlock (
+                    title = stringResource(R.string.title_three),
+                    artist = stringResource(R.string.artist_three) ,
+                    year = stringResource(R.string.year_three)
+                )
 
-        Row(
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(horizontal = 30.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceEvenly,
-        ) {
-            ActionButton(
-                buttonName = "Back",
-                onButtonClicked = { goBack() },
-            )
+                MainButtonsRow(
+                    onButtonClickedBack = { currentScreen = 2},
+                    onButtonClickedNext = { currentScreen = 4 },
+                )
+            }
+            4 -> {
+                MainImage (
+                    picture = R.drawable.cat_four,
+                    description = stringResource(R.string.a_wonderful_cat_four),
+                )
 
-            ActionButton(
-                buttonName = "Next",
-                onButtonClicked = { goNext() },
-            )
+                MainTextBlock (
+                    title = stringResource(R.string.title_four),
+                    artist = stringResource(R.string.artist_four) ,
+                    year = stringResource(R.string.year_four)
+                )
+
+                MainButtonsRow(
+                    onButtonClickedBack = { currentScreen = 3},
+                    onButtonClickedNext = { currentScreen = 5 },
+                )
+            }
+           else -> {
+               MainImage (
+                   picture = R.drawable.cat_five,
+                   description = stringResource(R.string.a_wonderful_cat_five),
+               )
+
+               MainTextBlock (
+                   title = stringResource(R.string.title_five),
+                   artist = stringResource(R.string.artist_five) ,
+                   year = stringResource(R.string.year_five)
+               )
+
+               MainButtonsRow(
+                   onButtonClickedBack = { currentScreen = 4},
+                   onButtonClickedNext = { currentScreen = 1 },
+               )
+           }
         }
     }
 }
@@ -126,23 +152,62 @@ fun ArtGalleryApp(
 fun MainImage(
     picture: Int,
     description: String,
-    modifier: Modifier = Modifier.fillMaxWidth()
-
 ){
     Image(
         painter = painterResource(picture),
         contentDescription = description,
-        contentScale = ContentScale.Crop
+        contentScale = ContentScale.Crop,
     )
 }
 
 @Composable
+fun MainTextBlock(
+    title: String,
+    artist: String,
+    year: String,
+    modifier: Modifier = Modifier
+
+){
+    Column (
+        verticalArrangement = Arrangement.Center,
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentWidth()
+    ){
+        Text(
+            text = title,
+            fontSize = 44.sp,
+            modifier = modifier
+                .padding(30.dp)
+                .align(Alignment.CenterHorizontally)
+        )
+        Row (
+            horizontalArrangement = Arrangement.Center,
+            modifier = modifier.padding(30.dp)
+
+        ) {
+            Text(
+                text = "$artist \n",
+                fontSize = 16.sp,
+                modifier = modifier
+            )
+
+            Text(
+                text = year,
+                fontSize = 16.sp,
+                modifier = modifier
+            )
+
+        }
+}}
+
+@Composable
 fun ActionButton(
     buttonName: String,
-    onButtonClicked: () -> Unit
+    buttonClicked: () -> Unit
 ){
     Button(
-        onClick = { onButtonClicked }
+        onClick = buttonClicked
     ) {
         Text(
             text = buttonName
@@ -150,8 +215,46 @@ fun ActionButton(
     }
 }
 
-fun goBack(){}
-fun goNext(){}
+
+@Composable
+fun MainButtonsRow(
+    onButtonClickedBack: () -> Unit,
+    onButtonClickedNext: () -> Unit,
+){
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 30.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceEvenly,
+    ) {
+        ActionButton(
+            buttonName = "Back",
+            buttonClicked = onButtonClickedBack
+        )
+
+        ActionButton(
+            buttonName = "Next",
+            buttonClicked = onButtonClickedNext
+        )
+    }
+}
+
+/*fun onButtonClickedBack(currentScreen: Int) {
+    if (currentScreen >= 6){
+        currentScreen = 1
+    } else { currentScreen++ }
+
+}*/
+
+/*fun onButtonClickedNext(
+    currentScreen: Int
+) {
+     if (currentScreen <= 1){
+        currentScreen = 6
+    } else { currentScreen-- }
+    }*/
+
 
 @Preview(showBackground = true)
 @Composable
