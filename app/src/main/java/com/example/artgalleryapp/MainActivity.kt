@@ -10,8 +10,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -55,7 +60,9 @@ fun ArtGalleryApp(
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
+            .fillMaxWidth()
+            .verticalScroll(rememberScrollState())
     ) {
         when (currentScreen) {
             1 -> {
@@ -152,11 +159,14 @@ fun ArtGalleryApp(
 fun MainImage(
     picture: Int,
     description: String,
+    modifier: Modifier = Modifier.height(300.dp)
 ){
     Image(
         painter = painterResource(picture),
         contentDescription = description,
-        contentScale = ContentScale.Crop,
+        contentScale = ContentScale.FillHeight,
+        modifier = modifier
+            .fillMaxWidth(),
     )
 }
 
